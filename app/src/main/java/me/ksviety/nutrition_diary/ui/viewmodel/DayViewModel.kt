@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import me.ksviety.nutrition_diary.data.DiaryRepository
 import me.ksviety.nutrition_diary.data.database.DiaryDatabase
 import me.ksviety.nutrition_diary.data.model.Intake
@@ -50,4 +52,19 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 	fun setDate(date: LocalDate) {
 		_date.postValue(date)
 	}
+
+	fun delete(vararg intakes: Intake) =
+			viewModelScope.launch {
+				repository.delete(*intakes)
+			}
+
+	fun add(vararg intakes: Intake) =
+			viewModelScope.launch {
+				repository.add(*intakes)
+			}
+
+	fun update(vararg  intakes: Intake) =
+			viewModelScope.launch {
+				repository.update(*intakes)
+			}
 }
