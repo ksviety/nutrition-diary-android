@@ -3,7 +3,9 @@ package me.ksviety.nutrition_diary.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import me.ksviety.nutrition_diary.extension.asPeriod
 import java.time.Instant
+import java.time.LocalDate
 
 /**
  * @param timestamp Unix epoch seconds (by default set to now)
@@ -19,3 +21,7 @@ data class Intake(
 		val id: Int = 0,
 		val timestamp: Long = Instant.now().epochSecond
 )
+
+fun Intake.isWithinDate(date: LocalDate) = timestamp in date.asPeriod
+
+fun Intake.isNotWithinDate(date: LocalDate) = !isWithinDate(date)
