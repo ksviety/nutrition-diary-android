@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import me.ksviety.nutrition_diary.data.DiaryRepository
@@ -16,13 +17,12 @@ import java.time.ZoneId
 class DayViewModel(application: Application) : AndroidViewModel(application) {
 	private val repository: DiaryRepository
 
-	private val _intakes = MediatorLiveData<List<Intake>>()
 	private val _date = MutableLiveData<LocalDate>()
 
 	private val currentDate: LocalDate
 		get() = LocalDate.now(ZoneId.systemDefault())
 
-	val intakes = _intakes as LiveData<List<Intake>>
+	val intakes: LiveData<List<Intake>>
 
 	init {
 		_date.value = currentDate
@@ -30,18 +30,12 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 		val database = DiaryDatabase(application)
 		val dao = database.getDao()
 
-		repository = DiaryRepository(dao).also {
-			_intakes.addSource(it.intakes) { intakes ->
-				val date = _date.value ?: return@addSource
-				_intakes.postValue(intakes.filter { intake -> intake.isWithin(date) })
+		repository = DiaryRepository(dao).also { repository ->
+			intakes = Transformations.map(repository.intakes) { intakes ->
+				val date  = _date.value ?: throw IllegalStateException()
+				intakes.filter { it.isWithin(date) }
 			}
 		}
-	}
-
-	override fun onCleared() {
-		super.onCleared()
-		
-		_intakes.removeSource(repository.intakes)
 	}
 
 	fun delete(vararg intakes: Intake) = dateAware(*intakes) {
