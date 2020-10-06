@@ -40,6 +40,12 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 		}
 	}
 
+	override fun onCleared() {
+		super.onCleared()
+		
+		_intakes.removeSource(repository.intakes)
+	}
+
 	fun delete(vararg intakes: Intake) = dateAware(*intakes) {
 		viewModelScope.launch {
 			repository.delete(*intakes)
