@@ -10,8 +10,6 @@ import kotlinx.coroutines.launch
 import me.ksviety.nutrition_diary.data.DiaryRepository
 import me.ksviety.nutrition_diary.data.database.DiaryDatabase
 import me.ksviety.nutrition_diary.data.model.Intake
-import me.ksviety.nutrition_diary.data.model.isNotWithin
-import me.ksviety.nutrition_diary.data.model.isWithin
 import java.time.LocalDate
 import java.time.ZoneId
 

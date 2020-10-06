@@ -20,8 +20,9 @@ data class Intake(
 		@PrimaryKey(autoGenerate = true)
 		val id: Int = 0,
 		val timestamp: Long = Instant.now().epochSecond
-)
+) {
 
-fun Intake.isWithin(date: LocalDate) = timestamp in date.asPeriod
+	fun isWithin(date: LocalDate) = timestamp in date.asPeriod
 
-fun Intake.isNotWithin(date: LocalDate) = !isWithin(date)
+	fun isNotWithin(date: LocalDate) = !isWithin(date)
+}
