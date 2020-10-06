@@ -63,8 +63,9 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 				repository.add(*intakes)
 			}
 
-	fun update(vararg  intakes: Intake) =
+	fun update(vararg intakes: Intake) =
 			viewModelScope.launch {
 				repository.update(*intakes)
 			}
+
 }
