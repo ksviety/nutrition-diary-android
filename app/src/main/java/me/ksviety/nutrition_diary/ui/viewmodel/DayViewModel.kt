@@ -3,7 +3,6 @@ package me.ksviety.nutrition_diary.ui.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
@@ -22,19 +21,18 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 	private val currentDate: LocalDate
 		get() = LocalDate.now(ZoneId.systemDefault())
 
-	val intakes: LiveData<List<Intake>>
+	val intakes : LiveData<List<Intake>>
 
 	init {
 		_date.value = currentDate
 
-		val database = DiaryDatabase(application)
-		val dao = database.getDao()
+		DiaryDatabase(application).also {
+			repository = DiaryRepository(it.getDao())
+		}
 
-		repository = DiaryRepository(dao).also { repository ->
-			intakes = Transformations.map(repository.intakes) { intakes ->
-				val date  = _date.value ?: throw IllegalStateException()
-				intakes.filter { it.isWithin(date) }
-			}
+		intakes = Transformations.map(repository.intakes) { intakes ->
+			val date  = _date.value ?: throw IllegalStateException()
+			intakes.filter { it.isWithin(date) }
 		}
 	}
 
