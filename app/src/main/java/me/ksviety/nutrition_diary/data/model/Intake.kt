@@ -22,6 +22,6 @@ data class Intake(
 		val timestamp: Long = Instant.now().epochSecond
 )
 
-fun Intake.isWithinDate(date: LocalDate) = timestamp in date.asPeriod
+fun Intake.isWithin(date: LocalDate) = timestamp in date.asPeriod
 
-fun Intake.isNotWithinDate(date: LocalDate) = !isWithinDate(date)
+fun Intake.isNotWithin(date: LocalDate) = !isWithin(date)
