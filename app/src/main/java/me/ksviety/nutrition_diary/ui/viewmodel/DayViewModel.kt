@@ -19,13 +19,10 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 
 	private val _date = MutableLiveData<LocalDate>()
 
-	private val currentDate: LocalDate
-		get() = LocalDate.now(ZoneId.systemDefault())
-
 	val intakes : LiveData<List<Intake>>
 
 	init {
-		_date.value = currentDate
+		_date.value = ZonedDateTime.now(ZoneId.systemDefault()).toLocalDate()
 
 		DiaryDatabase(application).also {
 			repository = DiaryRepository(it.getDao())
