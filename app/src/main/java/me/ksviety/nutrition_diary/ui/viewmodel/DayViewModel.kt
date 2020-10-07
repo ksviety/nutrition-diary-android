@@ -12,6 +12,7 @@ import me.ksviety.nutrition_diary.data.database.DiaryDatabase
 import me.ksviety.nutrition_diary.data.model.Intake
 import java.time.LocalDate
 import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class DayViewModel(application: Application) : AndroidViewModel(application) {
 	private val repository: DiaryRepository
@@ -36,37 +37,17 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 		}
 	}
 
-	fun delete(vararg intakes: Intake) = dateAware(*intakes) {
-		viewModelScope.launch {
-			repository.delete(*intakes)
-		}
+	fun setDate(date: LocalDate) = _date.postValue(date)
+
+	fun delete(vararg intakes: Intake) = viewModelScope.launch {
+		repository.delete(*intakes)
 	}
 
-	fun add(vararg intakes: Intake) = dateAware(*intakes) {
-		viewModelScope.launch {
-			repository.add(*intakes)
-		}
+	fun add(vararg intakes: Intake) = viewModelScope.launch {
+		repository.add(*intakes)
 	}
 
-	fun update(vararg intakes: Intake) = dateAware(*intakes) {
-		viewModelScope.launch {
-			repository.update(*intakes)
-		}
-	}
-
-	/**
-	 * Executes date aware intakes operation. If at least one of the intakes is out of the date,
-	 * the date will be changed to the actual (not the date of the intake)
-	 *
-	 * @throws IllegalStateException if [_date] is unset
-	 */
-	private inline fun <T> dateAware(vararg intakes: Intake, block: () -> T): T {
-		val date = _date.value ?: throw IllegalStateException("Date is not set")
-		val isOutdated = intakes.any { it.isNotWithin(date) }
-
-		return block().also {
-			if (isOutdated)
-				_date.postValue(currentDate)
-		}
+	fun update(vararg intakes: Intake) = viewModelScope.launch {
+		repository.update(*intakes)
 	}
 }
