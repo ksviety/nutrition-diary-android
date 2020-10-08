@@ -19,7 +19,8 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 
 	private val _date = MutableLiveData<LocalDate>()
 
-	val intakes : LiveData<List<Intake>>
+	val intakes: LiveData<List<Intake>>
+	val date = _date as LiveData<LocalDate>
 
 	init {
 		_date.value = ZonedDateTime.now(ZoneId.systemDefault()).toLocalDate()

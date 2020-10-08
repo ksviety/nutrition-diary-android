@@ -40,6 +40,9 @@ dependencies {
     def lifecycle_version = "2.2.0"
     def room_version = "2.2.5"
 
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
+
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"

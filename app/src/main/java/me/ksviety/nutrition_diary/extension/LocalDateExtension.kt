@@ -8,7 +8,7 @@ import java.time.ZoneOffset
  */
 val LocalDate.asPeriod: LongRange
 	get() {
-		val zone = ZoneOffset.systemDefault()
+		val zone = ZoneOffset.UTC
 		val start = atStartOfDay(zone).toEpochSecond()
 		val end = tomorrow.atStartOfDay(zone).toEpochSecond() - 1L
 
