@@ -3,13 +3,10 @@ package me.ksviety.nutrition_diary.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import me.ksviety.nutrition_diary.extension.asPeriod
-import java.time.Instant
-import java.time.LocalDate
+import androidx.room.TypeConverter
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
-/**
- * @param timestamp Unix epoch seconds (by default set to now)
- */
 @Entity(tableName = "intakes")
 data class Intake(
 		var name: String,
@@ -19,10 +16,16 @@ data class Intake(
 		var type: IntakeType,
 		@PrimaryKey(autoGenerate = true)
 		val id: Int = 0,
-		val timestamp: Long = Instant.now().epochSecond
+		val datetime: LocalDateTime = LocalDateTime.now()
 ) {
 
-	fun isWithin(date: LocalDate) = timestamp in date.asPeriod
+	class Converter {
 
-	fun isNotWithin(date: LocalDate) = !isWithin(date)
+		@TypeConverter
+		fun fromDatetime(datetime: LocalDateTime) = datetime.toEpochSecond(ZoneOffset.UTC)
+
+		@TypeConverter
+		fun toDatetime(timestamp: Long) =
+				LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC)!!
+	}
 }

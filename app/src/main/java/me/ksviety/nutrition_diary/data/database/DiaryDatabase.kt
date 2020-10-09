@@ -14,7 +14,8 @@ import me.ksviety.nutrition_diary.data.model.IntakeType
 		exportSchema = false
 )
 @TypeConverters(
-		IntakeType.Converter::class
+		IntakeType.Converter::class,
+		Intake.Converter::class
 )
 abstract class DiaryDatabase : RoomDatabase() {
 	abstract fun getDao(): DiaryDao

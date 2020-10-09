@@ -64,16 +64,16 @@ class MainActivity : AppCompatActivity() {
 	private fun onSelectDateClicked(): Boolean {
 		MaterialDatePicker.Builder.datePicker().apply {
 			val localDate = viewModel.date.value ?: throw IllegalStateException()
-			val startOfDay = localDate.atStartOfDay().toInstant(ZoneOffset.UTC).toEpochMilli()
-			setSelection(startOfDay)
+			val startOfDay = localDate.atStartOfDay().toInstant(ZoneOffset.MIN)
+			setSelection(startOfDay.toEpochMilli())
 
 			build().apply {
 
 				addOnPositiveButtonClickListener {
 					val instant = Instant.ofEpochMilli(it)
-					val selection = LocalDateTime.ofInstant(instant, ZONE_ID)
+					val selection = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
 
-					viewModel.setDate(selection.toLocalDate())
+					viewModel.setDate(selection.toLocalDate(), ZONE_ID)
 				}
 
 				show(supportFragmentManager, tag)

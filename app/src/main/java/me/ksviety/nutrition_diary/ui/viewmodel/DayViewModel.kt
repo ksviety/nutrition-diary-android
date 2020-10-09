@@ -31,11 +31,18 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 
 		intakes = Transformations.map(repository.intakes) { intakes ->
 			val date  = _date.value ?: throw IllegalStateException()
-			intakes.filter { it.isWithin(date) }
+			val startOfDay = date.atStartOfDay().minusSeconds(1)
+			val endOfDay = date.plusDays(1).atStartOfDay()
+			intakes.filter {
+				val datetime = it.datetime
+				datetime.isAfter(startOfDay) && datetime.isBefore(endOfDay)
+			}
 		}
 	}
 
-	fun setDate(date: LocalDate) = _date.postValue(date)
+	fun setDate(date: LocalDate, zoneId: ZoneId) = _date.postValue(
+			date.atStartOfDay(zoneId).toLocalDate()
+	)
 
 	fun delete(vararg intakes: Intake) = viewModelScope.launch {
 		repository.delete(*intakes)
