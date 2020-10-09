@@ -9,15 +9,27 @@ import java.time.ZoneOffset
 
 @Entity(tableName = "intakes")
 data class Intake(
-		var name: String,
-		var calories: Float,
+		val name: String,
+		val calories: Float,
 		@ColumnInfo(name = "is_necessary")
-		var isNecessary: Boolean,
-		var type: IntakeType,
+		val isNecessary: Boolean,
+		val type: IntakeType,
 		@PrimaryKey(autoGenerate = true)
 		val id: Int = 0,
 		val datetime: LocalDateTime = LocalDateTime.now()
 ) {
+
+	fun setName(name: String) =
+			Intake(name, calories, isNecessary, type, id, datetime)
+
+	fun setCalories(calories: Float) =
+			Intake(name, calories, isNecessary, type, id, datetime)
+
+	fun setNecessity(necessity: Boolean) =
+			Intake(name, calories, necessity, type, id, datetime)
+
+	fun setType(type: IntakeType) =
+			Intake(name, calories, isNecessary, type, id, datetime)
 
 	class Converter {
 
