@@ -1,26 +1,17 @@
-package me.ksviety.nutrition_diary.ui
+package me.ksviety.nutrition_diary.ui.activity
 
 import android.os.Bundle
-import android.os.Parcel
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
-import kotlinx.coroutines.runBlocking
 import me.ksviety.nutrition_diary.R
-import me.ksviety.nutrition_diary.data.DiaryRepository
-import me.ksviety.nutrition_diary.data.database.DiaryDatabase
 import me.ksviety.nutrition_diary.ui.viewmodel.DayViewModel
 import java.time.Instant
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
