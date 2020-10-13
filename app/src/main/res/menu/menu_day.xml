@@ -6,7 +6,8 @@
     <item
         android:id="@+id/option_select_date"
         app:showAsAction="always"
-        android:title="@string/menu_day_select_date"
+        android:title="@string/menu_calendar_title"
+        android:contentDescription="@string/menu_calendar_description"
         android:icon="@drawable/ic_round_calendar_today_24" />
 
 </menu>

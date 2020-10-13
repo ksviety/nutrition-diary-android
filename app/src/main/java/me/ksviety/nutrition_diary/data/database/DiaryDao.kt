@@ -12,10 +12,10 @@ import me.ksviety.nutrition_diary.data.model.Intake
 @Dao
 interface DiaryDao {
 
-	@Query("SELECT * FROM intakes ORDER BY timestamp ASC")
+	@Query("SELECT * FROM intakes ORDER BY datetime ASC")
 	fun getIntakes(): LiveData<List<Intake>>
 
-	@Query("SELECT * FROM intakes ORDER BY timestamp ASC")
+	@Query("SELECT * FROM intakes ORDER BY datetime ASC")
 	suspend fun loadIntakes(): List<Intake>
 
 	@Update

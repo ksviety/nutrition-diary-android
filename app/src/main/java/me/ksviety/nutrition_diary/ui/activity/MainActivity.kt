@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.datepicker.MaterialDatePicker
+import kotlinx.android.synthetic.main.content_main.*
 import me.ksviety.nutrition_diary.R
 import me.ksviety.nutrition_diary.ui.viewmodel.DayViewModel
 import java.time.Instant
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
-		setSupportActionBar(findViewById(R.id.toolbar))
+		setSupportActionBar(findViewById(R.id.activity_main_toolbar))
 
 		ViewModelProvider.AndroidViewModelFactory(application).also { factory ->
 
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
 				model.date.observe(this) {
 					supportActionBar?.let { actionBar ->
-						actionBar.title = resources.getString(R.string.app_name)
 						actionBar.subtitle =
 								it.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
 					}

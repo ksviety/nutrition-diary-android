@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Дневник питания</string>
+    <string name="menu_calendar_title">Выбрать дату</string>
+    <string name="menu_calendar_description">Выбор даты</string>
+    <string name="menu_edit_save">Сохранить</string>
+    <string name="intake_type_drink">Напиток</string>
+    <string name="intake_type_food">Пища</string>
+    <string name="cannot_be_empty_error">Не может быть пустым</string>
+    <string name="edit_intake_field_name">Название</string>
+    <string name="edit_intake_field_type">Тип</string>
+    <string name="edit_intake_field_calories">Калории</string>
+    <string name="suffix_kcal">ккал</string>
+    <string name="helper_name_field">Произвольное название продукта</string>
+    <string name="necessity_text">Было ли это необходимо?</string>
+    <string name="edit_intake_title_edit">Редактирование</string>
+    <string name="edit_intake_title_add">Добавление</string>
+    <string name="hint_calories">* Если вы не знаете сколько калорий было в продукте, то просто оставьте поле пустым или напишите ноль.</string>
+
+    <string-array name="intake_types">
+        <item>Пища</item>
+        <item>Напиток</item>
+    </string-array>
+</resources>

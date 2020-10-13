@@ -1,16 +1,26 @@
 <resources>
-    <string name="app_name">Nutrition Diary</string>
+    <string name="app_name">Дневник питания</string>
     <string name="menu_calendar_title">Select date</string>
     <string name="menu_calendar_description">Date selection</string>
-    <string name="title_activity_s_main">sMainActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="menu_day_select_date">Select date</string>
+    <string name="menu_edit_save">Save</string>
+
+    <string name="intake_type_drink">Drink</string>
+    <string name="intake_type_food">Food</string>
+
+    <string name="cannot_be_empty_error">Cannot be empty</string>
+    <string name="edit_intake_field_name">Name</string>
+    <string name="edit_intake_field_type">Type</string>
+    <string name="edit_intake_field_calories">Calories</string>
+    <string name="suffix_kcal">kcal</string>
+    <string name="helper_name_field">Arbitrary product name</string>
+    <string name="necessity_text">Was this necessary?</string>
+    <string name="edit_intake_title_edit">Edit</string>
+    <string name="edit_intake_title_add">Add</string>
+    <string name="hint_calories">* If you don\'t know how many calories the product has, just leave the field empty or set it to zero.</string>
+
+    <string-array name="intake_types">
+        <item>Food</item>
+        <item>Drink</item>
+    </string-array>
 </resources>

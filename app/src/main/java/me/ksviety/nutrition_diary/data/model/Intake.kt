@@ -1,5 +1,7 @@
 package me.ksviety.nutrition_diary.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -15,9 +17,18 @@ data class Intake(
 		val isNecessary: Boolean,
 		val type: IntakeType,
 		@PrimaryKey(autoGenerate = true)
-		val id: Int = 0,
+		val id: Int = -1,
 		val datetime: LocalDateTime = LocalDateTime.now()
-) {
+) : Parcelable {
+
+	constructor(parcel: Parcel) : this(
+			parcel.readString() ?: throw IllegalArgumentException(),
+			parcel.readFloat(),
+			parcel.readByte() != 0.toByte(),
+			IntakeType.values()[parcel.readInt()],
+			parcel.readInt(),
+			LocalDateTime.ofEpochSecond(parcel.readLong(), 0, ZoneOffset.UTC)) {
+	}
 
 	fun setName(name: String) =
 			Intake(name, calories, isNecessary, type, id, datetime)
@@ -31,6 +42,19 @@ data class Intake(
 	fun setType(type: IntakeType) =
 			Intake(name, calories, isNecessary, type, id, datetime)
 
+	override fun writeToParcel(parcel: Parcel, flags: Int) {
+		parcel.writeString(name)
+		parcel.writeFloat(calories)
+		parcel.writeByte(if (isNecessary) 1 else 0)
+		parcel.writeInt(type.ordinal)
+		parcel.writeInt(id)
+		parcel.writeLong(datetime.toEpochSecond(ZoneOffset.UTC))
+	}
+
+	override fun describeContents(): Int {
+		return 0
+	}
+
 	class Converter {
 
 		@TypeConverter
@@ -39,5 +63,21 @@ data class Intake(
 		@TypeConverter
 		fun toDatetime(timestamp: Long) =
 				LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC)!!
+	}
+
+	companion object {
+		val placeholder: Intake
+			get() = Intake("", 0.0f, false, IntakeType.Food)
+
+		val CREATOR = object : Parcelable.Creator<Intake> {
+
+			override fun createFromParcel(parcel: Parcel): Intake {
+				return Intake(parcel)
+			}
+
+			override fun newArray(size: Int): Array<Intake?> {
+				return arrayOfNulls(size)
+			}
+		}
 	}
 }
