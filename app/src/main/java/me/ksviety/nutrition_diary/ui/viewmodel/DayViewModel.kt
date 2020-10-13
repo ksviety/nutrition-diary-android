@@ -1,6 +1,7 @@
 package me.ksviety.nutrition_diary.ui.viewmodel
 
 import android.app.Application
+import android.content.ContentProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,13 +30,14 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
 			repository = DiaryRepository(it.getDao())
 		}
 
-		intakes = Transformations.map(repository.intakes) { intakes ->
-			val date  = _date.value ?: throw IllegalStateException()
-			val startOfDay = date.atStartOfDay().minusSeconds(1)
-			val endOfDay = date.plusDays(1).atStartOfDay()
-			intakes.filter {
-				val datetime = it.datetime
-				datetime.isAfter(startOfDay) && datetime.isBefore(endOfDay)
+		intakes = Transformations.switchMap(repository.intakes) { intakes ->
+			Transformations.map(date) { date ->
+				val startOfDay = date.atStartOfDay().minusSeconds(1)
+				val endOfDay = date.plusDays(1).atStartOfDay()
+				intakes.filter {
+					val datetime = it.datetime
+					datetime.isAfter(startOfDay) && datetime.isBefore(endOfDay)
+				}
 			}
 		}
 	}

@@ -3,7 +3,7 @@
     <string name="app_name">Дневник питания</string>
     <string name="menu_calendar_title">Выбрать дату</string>
     <string name="menu_calendar_description">Выбор даты</string>
-    <string name="menu_edit_save">Сохранить</string>
+    <string name="action_save">Сохранить</string>
     <string name="intake_type_drink">Напиток</string>
     <string name="intake_type_food">Пища</string>
     <string name="cannot_be_empty_error">Не может быть пустым</string>
@@ -21,4 +21,12 @@
         <item>Пища</item>
         <item>Напиток</item>
     </string-array>
+    <string name="list_item_intake_calories">%1$.1f ккал</string>
+    <string name="action_remove">Удалить</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="dialog_remove_intake_note_title">Удалить?</string>
+    <string name="dialog_remove_intake_note_message">Вы действительно хотите удалить запись о приеме пищи?</string>
+    <string name="snackbar_removed_intake_note">Запись о приеме пищи была удалена</string>
+    <string name="snackbar_added_intake_note">Запись о приеме пищи была добавлена</string>
+    <string name="message_no_intake_notes_yet">Здесь прока нет ни одной записи</string>
 </resources>

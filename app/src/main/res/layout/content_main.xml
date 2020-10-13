@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/content_main_intakes_recycler"
+        tools:listitem="@layout/list_item_intake"
+        tools:itemCount="6"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
-        android:id="@+id/txv"
+        android:id="@+id/content_main_no_intake_notes_message"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:gravity="center"
+        android:text="@string/message_no_intake_notes_yet"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

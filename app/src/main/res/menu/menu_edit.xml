@@ -6,6 +6,6 @@
     <item
         android:id="@+id/menu_item_save"
         app:showAsAction="ifRoom"
-        android:title="@string/menu_edit_save" />
+        android:title="@string/action_save" />
 
 </menu>

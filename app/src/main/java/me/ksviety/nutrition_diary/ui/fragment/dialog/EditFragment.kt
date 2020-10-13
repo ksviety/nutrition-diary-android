@@ -54,7 +54,7 @@ class EditFragment : DialogFragment() {
 				viewModel = ViewModelProvider(this, factory)[EditViewModel::class.java]
 			}
 
-			purpose = if (intake.id == -1) Purpose.Adding else Purpose.Editing
+			purpose = if (intake.id == 0) Purpose.Adding else Purpose.Editing
 		}
 	}
 

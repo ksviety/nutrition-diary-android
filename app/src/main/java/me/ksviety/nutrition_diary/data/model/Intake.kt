@@ -17,7 +17,7 @@ data class Intake(
 		val isNecessary: Boolean,
 		val type: IntakeType,
 		@PrimaryKey(autoGenerate = true)
-		val id: Int = -1,
+		val id: Int = 0,
 		val datetime: LocalDateTime = LocalDateTime.now()
 ) : Parcelable {
 
