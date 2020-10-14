@@ -23,6 +23,11 @@
         <item>Drink</item>
     </string-array>
 
+    <string-array name="redundant_intake_types">
+        <item>Redundant food</item>
+        <item>Redundant drink</item>
+    </string-array>
+
     <string name="action_remove">Remove</string>
     <string name="action_save">Save</string>
     <string name="action_cancel">Cancel</string>

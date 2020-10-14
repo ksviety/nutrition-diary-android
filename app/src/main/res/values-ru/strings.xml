@@ -21,6 +21,12 @@
         <item>Пища</item>
         <item>Напиток</item>
     </string-array>
+
+    <string-array name="redundant_intake_types">
+        <item>Излишняя пища</item>
+        <item>Излишний напиток</item>
+    </string-array>
+
     <string name="list_item_intake_calories">%1$.1f ккал</string>
     <string name="action_remove">Удалить</string>
     <string name="action_cancel">Отмена</string>

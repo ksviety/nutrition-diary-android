@@ -48,7 +48,12 @@ class IntakeListAdapter(context: Context) : RecyclerView.Adapter<IntakeListAdapt
 						intake.name
 
 				findViewById<TextView>(R.id.list_item_intake_type).text =
-						resources.getStringArray(R.array.intake_types)[intake.type.ordinal]
+						resources.getStringArray(
+								if (intake.isRedundant)
+									R.array.redundant_intake_types
+								else
+									R.array.intake_types
+						)[intake.type.ordinal]
 
 				findViewById<TextView>(R.id.list_item_intake_calories).text =
 						if (intake.calories > 0f)
