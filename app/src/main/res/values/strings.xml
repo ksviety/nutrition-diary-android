@@ -12,7 +12,7 @@
     <string name="edit_intake_field_calories">Calories</string>
     <string name="suffix_kcal">kcal</string>
     <string name="helper_name_field">Arbitrary product name</string>
-    <string name="necessity_text">Was this necessary?</string>
+    <string name="necessity_text">Was this redundant?</string>
     <string name="edit_intake_title_edit">Edit</string>
     <string name="edit_intake_title_add">Add</string>
     <string name="hint_calories">* If you don\'t know how many calories the product has, just leave the field empty or set it to zero.</string>

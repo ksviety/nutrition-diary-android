@@ -71,7 +71,7 @@
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:layout_marginHorizontal="8dp"
-        android:id="@+id/content_edit_checkbox_necessity"
+        android:id="@+id/content_edit_checkbox_redundancy"
         android:layout_marginTop="8dp"
         android:text="@string/necessity_text"
         android:layout_width="wrap_content"

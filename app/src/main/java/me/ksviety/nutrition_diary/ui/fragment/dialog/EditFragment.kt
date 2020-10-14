@@ -116,13 +116,13 @@ class EditFragment : BottomSheetDialogFragment() {
 				} ?: throw IllegalStateException(ERROR_VIEW_NOT_FOUND)
 			} ?: throw IllegalStateException(ERROR_VIEW_NOT_FOUND)
 
-			// Setup intake necessity checkbox
-			content_edit_checkbox_necessity?.run {
+			// Setup intake redundancy checkbox
+			content_edit_checkbox_redundancy?.run {
 				// Synchronize with the intake
-				isChecked = intake.isNecessary
+				isChecked = intake.isRedundant
 
 				setOnCheckedChangeListener { _, isChecked ->
-					viewModel.modifyIntake { it.setNecessity(isChecked) }
+					viewModel.modifyIntake { it.setRedundancy(isChecked) }
 				}
 			} ?: throw IllegalStateException(ERROR_VIEW_NOT_FOUND)
 		} ?: throw IllegalStateException()

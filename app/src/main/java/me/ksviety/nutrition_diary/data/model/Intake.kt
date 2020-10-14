@@ -13,8 +13,8 @@ import java.time.ZoneOffset
 data class Intake(
 		val name: String,
 		val calories: Float,
-		@ColumnInfo(name = "is_necessary")
-		val isNecessary: Boolean,
+		@ColumnInfo(name = "is_redundancy")
+		val isRedundant: Boolean,
 		val type: IntakeType,
 		@PrimaryKey(autoGenerate = true)
 		val id: Int = 0,
@@ -31,21 +31,21 @@ data class Intake(
 	}
 
 	fun setName(name: String) =
-			Intake(name, calories, isNecessary, type, id, datetime)
+			Intake(name, calories, isRedundant, type, id, datetime)
 
 	fun setCalories(calories: Float) =
-			Intake(name, calories, isNecessary, type, id, datetime)
+			Intake(name, calories, isRedundant, type, id, datetime)
 
-	fun setNecessity(necessity: Boolean) =
-			Intake(name, calories, necessity, type, id, datetime)
+	fun setRedundancy(redundancy: Boolean) =
+			Intake(name, calories, redundancy, type, id, datetime)
 
 	fun setType(type: IntakeType) =
-			Intake(name, calories, isNecessary, type, id, datetime)
+			Intake(name, calories, isRedundant, type, id, datetime)
 
 	override fun writeToParcel(parcel: Parcel, flags: Int) {
 		parcel.writeString(name)
 		parcel.writeFloat(calories)
-		parcel.writeByte(if (isNecessary) 1 else 0)
+		parcel.writeByte(if (isRedundant) 1 else 0)
 		parcel.writeInt(type.ordinal)
 		parcel.writeInt(id)
 		parcel.writeLong(datetime.toEpochSecond(ZoneOffset.UTC))
