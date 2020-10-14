@@ -32,7 +32,7 @@
     <string name="action_cancel">Отмена</string>
     <string name="dialog_remove_intake_note_title">Удалить?</string>
     <string name="dialog_remove_intake_note_message">Вы действительно хотите удалить запись о приеме пищи?</string>
-    <string name="snackbar_removed_intake_note">Запись о приеме пищи была удалена</string>
-    <string name="snackbar_added_intake_note">Запись о приеме пищи была добавлена</string>
+    <string name="snackbar_removed_intake_note">Запись о приеме пищи была удалена.</string>
+    <string name="snackbar_added_intake_note">Запись о приеме пищи была добавлена.</string>
     <string name="message_no_intake_notes_yet">Здесь прока нет ни одной записи</string>
 </resources>

@@ -34,7 +34,7 @@
 
     <string name="dialog_remove_intake_note_title">Remove?</string>
     <string name="dialog_remove_intake_note_message">Do you really want to remove the intake note?</string>
-    <string name="snackbar_removed_intake_note">An intake note has been removed</string>
-    <string name="snackbar_added_intake_note">A new intake note has been added</string>
+    <string name="snackbar_removed_intake_note">An intake note has been removed.</string>
+    <string name="snackbar_added_intake_note">A new intake note has been added.</string>
     <string name="message_no_intake_notes_yet">There is no intake notes here yet</string>
 </resources>
