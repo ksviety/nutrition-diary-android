@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:layout_margin="8dp"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginHorizontal="8dp"
         android:id="@+id/content_edit_text_field_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +25,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,6 +70,7 @@
 
 
     <com.google.android.material.checkbox.MaterialCheckBox
+        android:layout_marginHorizontal="8dp"
         android:id="@+id/content_edit_checkbox_necessity"
         android:layout_marginTop="8dp"
         android:text="@string/necessity_text"
@@ -76,9 +78,19 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="24dp"
         android:text="@string/hint_calories"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/content_edit_save_button"
+        android:text="@string/action_save"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

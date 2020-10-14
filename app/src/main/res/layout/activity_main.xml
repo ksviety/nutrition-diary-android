@@ -12,6 +12,8 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/activity_main_toolbar"
+            app:titleTextColor="@android:color/white"
+            app:subtitleTextColor="#EFEFEF"
             app:menu="@menu/menu_day"
             app:title="@string/app_name"
             tools:subtitle="13 Oct, 2020"

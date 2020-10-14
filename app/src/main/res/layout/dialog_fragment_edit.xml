@@ -1,25 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/dialog_edit_toolbar"
-            tools:title="Edit"
-            app:menu="@menu/menu_edit"
-            android:layout_width="match_parent"
-            android:background="@color/primaryColor"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_round_close_24" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_edit" />
+    <include
+        layout="@layout/content_edit" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

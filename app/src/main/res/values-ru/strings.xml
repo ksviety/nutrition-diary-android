@@ -13,8 +13,8 @@
     <string name="suffix_kcal">ккал</string>
     <string name="helper_name_field">Произвольное название продукта</string>
     <string name="necessity_text">Было ли это необходимо?</string>
-    <string name="edit_intake_title_edit">Редактирование</string>
-    <string name="edit_intake_title_add">Добавление</string>
+    <string name="edit_intake_title_edit">Изменить</string>
+    <string name="edit_intake_title_add">Добавить</string>
     <string name="hint_calories">* Если вы не знаете сколько калорий было в продукте, то просто оставьте поле пустым или напишите ноль.</string>
 
     <string-array name="intake_types">

@@ -8,12 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.content_edit.*
-import kotlinx.android.synthetic.main.dialog_fragment_edit.*
 import me.ksviety.nutrition_diary.R
 import me.ksviety.nutrition_diary.data.model.Intake
 import me.ksviety.nutrition_diary.data.model.IntakeType
@@ -22,7 +21,7 @@ import me.ksviety.nutrition_diary.ui.viewmodel.EditViewModel
 private const val ARG_INTAKE = "edit_fragment.intake"
 private const val ERROR_VIEW_NOT_FOUND = "View not found!"
 
-class EditFragment : DialogFragment() {
+class EditFragment : BottomSheetDialogFragment() {
 	private lateinit var viewModel: EditViewModel
 	private lateinit var purpose: Purpose
 
@@ -31,20 +30,19 @@ class EditFragment : DialogFragment() {
 	private var onPositiveClickHandler: ((Intake) -> Unit)? = null
 	private var onNegativeClickHandler: (() -> Unit)? = null
 
-	override fun onStart() {
-		super.onStart()
+	override fun onCreateDialog(savedInstanceState: Bundle?) =
+			super.onCreateDialog(savedInstanceState).apply {
 
-		dialog?.window?.let { window ->
-			val width = ViewGroup.LayoutParams.MATCH_PARENT
-			val height = ViewGroup.LayoutParams.MATCH_PARENT
-			window.setLayout(width, height)
-			window.setWindowAnimations(R.style.AppTheme_Slide)
-		}
-	}
+				setOnShowListener {
+
+					findViewById<View>(com.google.android.material.R.id.design_bottom_sheet).also { dialog ->
+						dialog.setBackgroundResource(R.drawable.background_bottom_sheet)
+					}
+				}
+			}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setStyle(STYLE_NORMAL, R.style.AppTheme_FullScreenDialog)
 
 		// Get the intake or create new from the placeholder
 		(arguments?.getParcelable(ARG_INTAKE) ?: Intake.placeholder).also { intake ->
@@ -129,23 +127,24 @@ class EditFragment : DialogFragment() {
 			} ?: throw IllegalStateException(ERROR_VIEW_NOT_FOUND)
 		} ?: throw IllegalStateException()
 
-		dialog_edit_toolbar?.run {
-			title = when (purpose) {
+		content_edit_save_button?.run {
+			text = when (purpose) {
 				Purpose.Editing -> resources.getString(R.string.edit_intake_title_edit)
 				Purpose.Adding -> resources.getString(R.string.edit_intake_title_add)
 			}
 
-			// Close button pressed
-			setNavigationOnClickListener {
-				dismissAllowingStateLoss()
-			}
+			setOnClickListener {
 
-			setOnMenuItemClickListener {
-				when (it.itemId) {
-					R.id.menu_item_save -> onSaveButtonPressed()
+				viewModel.intake.value?.let { intake ->
+					if (intake.name.isBlank()) {
+						nameTextFieldLayout.error = resources.getString(R.string.cannot_be_empty_error)
+						return@let
+					}
 
-					else -> false
-				}
+					// Dismiss the dialog and fire the event
+					dismissAllowingStateLoss()
+					onPositiveClickHandler?.invoke(intake)
+				} ?: throw IllegalStateException()
 			}
 		} ?: throw IllegalStateException(ERROR_VIEW_NOT_FOUND)
 	}
@@ -159,22 +158,6 @@ class EditFragment : DialogFragment() {
 
 	fun setOnNegativeClickHandler(handler: () -> Unit) {
 		onNegativeClickHandler = handler
-	}
-
-	private fun onSaveButtonPressed(): Boolean {
-
-		viewModel.intake.value?.let { intake ->
-			if (intake.name.isBlank()) {
-				nameTextFieldLayout.error = resources.getString(R.string.cannot_be_empty_error)
-				return false
-			}
-
-			// Dismiss the dialog and fire the event
-			dismissAllowingStateLoss()
-			onPositiveClickHandler?.invoke(intake)
-
-			return true
-		} ?: throw IllegalStateException()
 	}
 
 	private enum class Purpose {

@@ -15,14 +15,4 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.FullScreenDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">@android:color/white</item>
-    </style>
-
-    <style name="AppTheme.Slide">
-        <item name="android:windowExitAnimation">@anim/slide_down</item>
-        <item name="android:windowEnterAnimation">@anim/slide_up</item>
-    </style>
-
 </resources>
