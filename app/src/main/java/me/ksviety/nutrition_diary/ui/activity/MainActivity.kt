@@ -7,6 +7,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -29,11 +32,18 @@ private val ZONE_ID = ZoneId.systemDefault()
 
 class MainActivity : AppCompatActivity() {
 	private lateinit var viewModel: DayViewModel
+	private lateinit var interstitialAd: InterstitialAd
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 		setSupportActionBar(findViewById(R.id.activity_main_toolbar))
+
+		MobileAds.initialize(this).also {
+			interstitialAd = InterstitialAd(this).apply {
+				adUnitId = "ca-app-pub-1873832342322436/4201701409"
+			}
+		}
 
 		ViewModelProvider.AndroidViewModelFactory(application).also { factory ->
 
@@ -91,9 +101,14 @@ class MainActivity : AppCompatActivity() {
 
 		fab.setOnClickListener { view ->
 			EditFragment.build(null).apply {
+				interstitialAd.loadAd(AdRequest.Builder().build())
+
 				setOnPositiveClickHandler {
 					viewModel.add(it)
 					Snackbar.make(view, R.string.snackbar_added_intake_note, Snackbar.LENGTH_LONG).show()
+
+					if (interstitialAd.isLoaded)
+						interstitialAd.show()
 				}
 
 				show(supportFragmentManager, this.toString())
